@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const API_BASE_URL = "http://localhost:8888/pages";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/pages";
 
 const textByMode = {
   login: {
@@ -128,7 +128,7 @@ export default function App() {
         </div>
         <div className="status-card">
           <span className="status-dot"></span>
-          <span>Backend API: http://localhost:8888</span>
+          <span>Backend API: {API_BASE_URL}</span>
         </div>
       </section>
 

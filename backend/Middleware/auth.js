@@ -6,28 +6,24 @@ const secretKey = 'acharya'
 const auth  = (req,res,next)=>{
 
     const data = req.headers["authorization"]
-    console.log(data,"token") 
-    const token = data.split(' ')[1]
-    console.log(token)
+    const token = data && data.startsWith("Bearer ") ? data.split(" ")[1] : null
 
-    if(token){
+    if(!token){
+        return res.status(401).send({msg:"Token is missing"})
+    }
+
     jwt.verify(token,secretKey,(err,validate)=>{
         if(err){
-            return res.send("Error while accessing",err)
+            return res.status(401).send({msg:"Invalid or expired token"})
         }
         if(validate){
             return next()
         }
-        return res.send("user is not authorized")
+        return res.status(401).send({msg:"user is not authorized"})
     })
-}
-else{
-    return res.send({msg:"Email id is not registered"})
-}
 }
 
 module.exports = auth
-
 
 
 

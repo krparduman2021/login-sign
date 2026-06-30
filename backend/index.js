@@ -16,6 +16,6 @@ app.get("/",(req,res)=>{
 })
 app.use('/pages',routes)
 
-app.listen(8888,()=>{
-    console.log("Server is running fine at 8888")
+app.listen(8888, "127.0.0.1", () => {
+    console.log("Server is running fine at http://127.0.0.1:8888")
 })
